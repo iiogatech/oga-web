@@ -1,0 +1,75 @@
+import Enter from '@/components/motion/Enter'
+import Reveal from '@/components/motion/Reveal'
+import RevealStagger from '@/components/motion/RevealStagger'
+import Container from '@/components/ui/Container'
+import SanityImage from '@/components/ui/SanityImage'
+import { getChapters } from '@/sanity/lib/content'
+
+const sectionBg = ['bg-[#14271f]', 'bg-brand-600', 'bg-[#14271f]'] as const
+
+export default async function OverseasChaptersPage() {
+  const chapters = await getChapters()
+
+  return (
+    <>
+      <section className="bg-[#14271f] pt-32 pb-12 text-center sm:pt-42">
+        <Container className="max-w-3xl">
+          <Enter
+            as="h1"
+            className="font-poppins text-3xl font-extrabold tracking-tight text-white sm:text-5xl"
+          >
+            Overseas Chapters
+          </Enter>
+          {/* <p className="font-plus-jakarta-sans mt-4 text-emerald-100/80">
+            IIOGA members carry the alma mater&apos;s spirit with them
+            wherever they go — here&apos;s a look at our chapters around the
+            world.
+          </p> */}
+        </Container>
+      </section>
+
+      {chapters.length === 0 ? (
+        <section className="bg-brand-950 px-6 py-16 text-center">
+          <p className="font-plus-jakarta-sans text-sm text-emerald-100/70">
+            No overseas chapters listed yet — check back soon.
+          </p>
+        </section>
+      ) : (
+        chapters.map((chapter, i) => (
+          <section
+            key={chapter._id}
+            className={`${sectionBg[i % sectionBg.length]} border-b border-white/10 py-14 px-2`}
+          >
+            <Container className="max-w-6xl">
+              <Reveal
+                as="h2"
+                className="font-poppins text-4xl font-extrabold tracking-[0.05em] text-white uppercase sm:text-5xl"
+              >
+                {chapter.country}
+              </Reveal>
+              {/* <p className="font-plus-jakarta-sans mt-3 max-w-2xl text-sm text-emerald-50/80">
+                {chapter.description}
+              </p> */}
+
+              <RevealStagger className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+                {(chapter.images ?? []).map((image) => (
+                  <div
+                    key={image._key}
+                    className="aspect-[4/3] overflow-hidden rounded-2xl border-[2px] border-white shadow-[0_4px_14px_0_rgba(0,0,0,0.25)]"
+                  >
+                    <SanityImage
+                      image={image}
+                      width={400}
+                      height={300}
+                      className="size-full object-cover"
+                    />
+                  </div>
+                ))}
+              </RevealStagger>
+            </Container>
+          </section>
+        ))
+      )}
+    </>
+  )
+}
