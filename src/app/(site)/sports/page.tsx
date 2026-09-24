@@ -57,7 +57,7 @@ export default async function SportsPage() {
           </Enter>
           <Enter
             delay={0.07}
-            className="p-2 sm:p-0 font-plus-jakarta-sans mt-5 flex flex-col gap-4 text-sm text-stone-600 sm:text-base"
+            className="font-plus-jakarta-sans mt-5 flex flex-col gap-4 p-2 text-sm text-stone-600 sm:p-0 sm:text-base"
           >
             <p>
               Whether you&apos;re aiming for a competitive win or just looking
@@ -131,7 +131,7 @@ export default async function SportsPage() {
         </Container>
       </section>
 
-      <section id="oga-sporting-spirit" className="scroll-mt-28 bg-cream pb-24">
+      <section id="oga-sporting-spirit" className="bg-cream scroll-mt-28 pb-24">
         <Container className="max-w-4xl">
           <Reveal
             variant="scale"

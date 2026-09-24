@@ -34,7 +34,8 @@ export const siteSettingsQuery = defineQuery(`*[_type == "siteSettings"][0]{
   whatsappUrl
 }`)
 
-export const chaptersQuery = defineQuery(`*[_type == "chapter"] | order(orderRank asc){
+export const chaptersQuery =
+  defineQuery(`*[_type == "chapter"] | order(orderRank asc){
   _id,
   country,
   description,

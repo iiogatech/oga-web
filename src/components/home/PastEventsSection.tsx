@@ -1,5 +1,3 @@
-import Link from 'next/link'
-
 import RevealStagger from '@/components/motion/RevealStagger'
 import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
@@ -11,7 +9,7 @@ function formatEventDate(date: string) {
   const d = new Date(date)
   return {
     month: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
-    day: d.getDate(),
+    year: d.getFullYear(),
   }
 }
 
@@ -37,8 +35,9 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
         ) : (
           <RevealStagger className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
             {events.map((event) => {
-              const { month, day } = formatEventDate(event.date)
+              const { month, year } = formatEventDate(event.date)
               const image = event.images?.[0]
+              const link = event.links?.[0]
               return (
                 <article
                   key={event._id}
@@ -58,19 +57,23 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
                         {month}
                       </span>
                       <span className="font-poppins text-2xl font-extrabold text-stone-900">
-                        {day}
+                        {year}
                       </span>
                     </div>
                     <div className="min-w-0 flex-1">
                       <h3 className="font-poppins truncate text-lg font-bold text-stone-900">
                         {event.title}
                       </h3>
-                      <Link
-                        href="/events"
-                        className="group font-poppins text-brand-600 mt-1 inline-flex items-center gap-1 text-xs font-semibold"
-                      >
-                        Check out Event Highlights <Arrow />
-                      </Link>
+                      {link && (
+                        <a
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group font-poppins text-brand-600 mt-1 inline-flex items-center gap-1 text-xs font-semibold"
+                        >
+                          {link.label} <Arrow />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </article>
@@ -80,7 +83,11 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
         )}
 
         <div className="mt-8 flex justify-center sm:hidden">
-          <Button href="/events" variant="brand" className="px-5 py-2.5 text-xs">
+          <Button
+            href="/events"
+            variant="brand"
+            className="px-5 py-2.5 text-xs"
+          >
             See more <Arrow />
           </Button>
         </div>

@@ -29,8 +29,12 @@ export const event = defineType({
     }),
     defineField({
       name: 'date',
-      title: 'Date',
-      type: 'datetime',
+      title: 'Month & Year',
+      description: 'Only the month and year are shown on the site.',
+      type: 'date',
+      options: {
+        dateFormat: 'MMMM yyyy',
+      },
       validation: (Rule) => Rule.required(),
     }),
     // defineField({

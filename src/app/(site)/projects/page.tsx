@@ -62,10 +62,10 @@ export default async function ProjectsPage() {
   return (
     <>
       {dehiwala.show && (
-        <section className="from-brand-50/80 bg-linear-to-b bg-cream pt-32 pb-16 sm:pt-42">
+        <section className="from-brand-50/80 bg-cream bg-linear-to-b pt-32 pb-16 sm:pt-42">
           <Container className="max-w-6xl">
             <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-              <Enter className="flex flex-col items-start gap-6 mx-2 sm:mx-0 lg:col-span-6">
+              <Enter className="mx-2 flex flex-col items-start gap-6 sm:mx-0 lg:col-span-6">
                 <h1 className="font-poppins text-5xl leading-tight font-bold tracking-tight text-stone-900 sm:text-6xl">
                   {dehiwala.title.split(' ').slice(0, -1).join(' ')}{' '}
                   <span className="text-brand-800">
@@ -76,17 +76,16 @@ export default async function ProjectsPage() {
                   value={dehiwala.body}
                   className="font-plus-jakarta-sans text-lg text-stone-600"
                 />
-                <p className="group border-brand-800/30 text-brand-800 font-poppins inline-flex items-center gap-2 border-b-2 pb-1.5 text-sm font-bold">
-                  Ground Breaking Ceremony Highlights
-                </p>
-                {/* {dehiwala.highlightsUrl && (
+                {dehiwala.highlightsUrl && dehiwala.highlightsLabel && (
                   <Link
                     href={dehiwala.highlightsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="group border-brand-800/30 text-brand-800 font-poppins inline-flex items-center gap-2 border-b-2 pb-1.5 text-sm font-bold"
                   >
                     {dehiwala.highlightsLabel} <Arrow />
                   </Link>
-                )} */}
+                )}
               </Enter>
               <Enter delay={0.14} className="lg:col-span-6">
                 <SanityImage
@@ -143,8 +142,8 @@ export default async function ProjectsPage() {
 
       {/* Ongoing Projects */}
       <section className="bg-cream px-6 py-14 lg:px-24">
-        <div className="mx-auto max-w-6xl rounded-4xl border border-[#e2ece5] bg-brand-700 p-5 sm:p-8 lg:p-12">
-          <SectionHeading tone='light' className="text-center sm:text-left">
+        <div className="bg-brand-700 mx-auto max-w-6xl rounded-4xl border border-[#e2ece5] p-5 sm:p-8 lg:p-12">
+          <SectionHeading tone="light" className="text-center sm:text-left">
             Ongoing Projects
           </SectionHeading>
 
@@ -232,7 +231,7 @@ export default async function ProjectsPage() {
       </section>
 
       {/* Donations & Relief Drives */}
-      <section className="border-t border-stone-100 bg-cream py-16">
+      <section className="bg-cream border-t border-stone-100 py-16">
         <Container className="max-w-4xl">
           <SectionHeading align="center">Donations</SectionHeading>
           <div className="mt-12 flex flex-col gap-8">

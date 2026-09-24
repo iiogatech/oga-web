@@ -57,7 +57,7 @@ export default async function Footer() {
   const { whatsappUrl } = await getSiteSettings()
 
   return (
-    <footer className="bg-brand-700 border-t  border-white/10">
+    <footer className="bg-brand-700 border-t border-white/10">
       <Container className="max-w-6xl py-10">
         <div className="flex flex-col gap-10 border-b border-white/10 pb-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
           {/* Brand + contact */}

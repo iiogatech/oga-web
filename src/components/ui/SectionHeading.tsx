@@ -22,7 +22,9 @@ export default function SectionHeading({
   const Wrapper = enter ? Enter : Reveal
 
   return (
-    <Wrapper className={`${align === 'center' ? 'text-center' : ''} ${className}`}>
+    <Wrapper
+      className={`${align === 'center' ? 'text-center' : ''} ${className}`}
+    >
       {eyebrow && (
         <p
           className={`font-poppins mb-2 text-xs font-semibold tracking-[0.6px] uppercase ${tone === 'dark' ? 'text-brand-600' : 'text-emerald-200'}`}

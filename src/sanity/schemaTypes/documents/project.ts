@@ -45,13 +45,18 @@ export const project = defineType({
       description: 'Only shown on the site while the project is ongoing.',
       hidden: ({ parent }) => parent?.status !== 'ongoing',
       validation: (Rule) =>
-        Rule.min(0).max(100).custom((value, context) => {
-          const parent = context.parent as { status?: string } | undefined
-          if (parent?.status === 'ongoing' && (value === undefined || value === null)) {
-            return 'Required while the project is ongoing'
-          }
-          return true
-        }),
+        Rule.min(0)
+          .max(100)
+          .custom((value, context) => {
+            const parent = context.parent as { status?: string } | undefined
+            if (
+              parent?.status === 'ongoing' &&
+              (value === undefined || value === null)
+            ) {
+              return 'Required while the project is ongoing'
+            }
+            return true
+          }),
     }),
     defineField({
       name: 'date',

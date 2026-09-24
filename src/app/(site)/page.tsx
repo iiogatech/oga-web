@@ -46,7 +46,6 @@ function formatEventDate(date: string) {
   const d = new Date(date)
   return {
     month: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
-    day: d.getDate(),
     year: d.getFullYear(),
   }
 }
@@ -81,7 +80,10 @@ export default async function HomePage() {
               delay={0.07}
               className="font-poppins text-5xl leading-tight font-bold tracking-tight text-white sm:text-6xl lg:text-7xl"
             />
-            <Enter delay={0.14} className="flex flex-wrap items-center gap-4 pt-3">
+            <Enter
+              delay={0.14}
+              className="flex flex-wrap items-center gap-4 pt-3"
+            >
               <Button href={home.hero.ctaUrl} variant="light">
                 {home.hero.ctaLabel}
               </Button>
@@ -124,7 +126,7 @@ export default async function HomePage() {
 
       {/* Ongoing Projects */}
       <section className="bg-cream px-6 py-14 lg:px-24">
-        <div className="mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] bg-brand-700 p-5 sm:p-8 lg:p-12">
+        <div className="bg-brand-700 mx-auto max-w-6xl rounded-[32px] border border-[#e2ece5] p-5 sm:p-8 lg:p-12">
           <div className="flex items-center justify-center gap-4 sm:items-end sm:justify-between">
             <SectionHeading tone="light">Ongoing Projects</SectionHeading>
             <Button
@@ -231,15 +233,15 @@ export default async function HomePage() {
               </p>
             ) : (
               upcomingEvents.map((event) => {
-                const { month, day, year } = formatEventDate(event.date)
+                const { month, year } = formatEventDate(event.date)
                 return (
                   <div
                     key={event._id}
-                    className="flex items-center gap-4 rounded-2xl border border-stone-200/80 bg-brand-700 p-6"
+                    className="bg-brand-700 flex items-center gap-4 rounded-2xl border border-stone-200/80 p-6"
                   >
-                    <div className="flex size-20 p-2 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5]">
+                    <div className="flex size-20 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5] p-2">
                       <span className="font-poppins text-brand-400 text-xs font-bold tracking-[0.6px] uppercase">
-                        {month} {day}
+                        {month}
                       </span>
                       <span className="font-poppins text-brand-900 text-2xl font-bold">
                         {year}
@@ -247,7 +249,7 @@ export default async function HomePage() {
                     </div>
                     <h3 className="font-poppins text-xl font-bold text-white">
                       {event.title}
-                    </h3> 
+                    </h3>
                     {/* <h3 className="font-poppins text-xl font-bold text-stone-900">
                       {event.title}
                     </h3> */}

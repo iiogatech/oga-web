@@ -17,8 +17,7 @@ export const siteSettings = defineType({
     defineField({
       name: 'donateUrl',
       title: 'Donate button URL',
-      description:
-        'Used by the Projects page "Donate Now" buttons.',
+      description: 'Used by the Projects page "Donate Now" buttons.',
       type: 'url',
       validation: (Rule) =>
         Rule.uri({ scheme: ['http', 'https'], allowRelative: true }),

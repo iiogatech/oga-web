@@ -37,7 +37,8 @@ export default async function MembershipPage() {
               image={membership.poster}
               width={588}
               height={735}
-              className="w-full object-cover"
+              fit="max"
+              className="w-full object-contain"
             />
           </Enter>
 

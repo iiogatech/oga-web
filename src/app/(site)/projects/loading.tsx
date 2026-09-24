@@ -5,7 +5,7 @@ export default function Loading() {
   return (
     <>
       {/* Hero */}
-      <section className="from-brand-50/80 bg-linear-to-b bg-cream pt-32 pb-16 sm:pt-42">
+      <section className="from-brand-50/80 bg-cream bg-linear-to-b pt-32 pb-16 sm:pt-42">
         <Container className="max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
             <div className="flex flex-col items-start gap-6 lg:col-span-6">
@@ -70,7 +70,7 @@ export default function Loading() {
       </section>
 
       {/* Donations & Relief Drives */}
-      <section className="border-t border-stone-100 bg-cream py-16">
+      <section className="bg-cream border-t border-stone-100 py-16">
         <Container className="max-w-4xl">
           <Skeleton className="mx-auto h-9 w-40" />
           <div className="mt-12 flex flex-col gap-8">

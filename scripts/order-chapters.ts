@@ -29,10 +29,9 @@ const client = createClient({
 const ORDER = ['Dubai', 'Australia', 'Canada']
 
 async function main() {
-  const chapters =
-    await client.fetch<{ _id: string; country: string }[]>(
-      `*[_type == "chapter"]{ _id, country }`,
-    )
+  const chapters = await client.fetch<{ _id: string; country: string }[]>(
+    `*[_type == "chapter"]{ _id, country }`,
+  )
 
   const ordered = [...chapters].sort((a, b) => {
     const ai = ORDER.indexOf(a.country)

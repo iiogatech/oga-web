@@ -38,7 +38,7 @@ export default async function OverseasChaptersPage() {
         chapters.map((chapter, i) => (
           <section
             key={chapter._id}
-            className={`${sectionBg[i % sectionBg.length]} border-b border-white/10 py-14 px-2`}
+            className={`${sectionBg[i % sectionBg.length]} border-b border-white/10 px-2 py-14`}
           >
             <Container className="max-w-6xl">
               <Reveal

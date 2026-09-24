@@ -3,7 +3,7 @@ export const siteConfig = {
   fullName: "ILMA International Old Girls' Association",
   tagline: 'EST. 1998 • COLOMBO',
   description:
-    "The Ilma International Old Girls' Association (IIOGA) brings together alumni of Ilma International Girls' School to uplift, enhance and develop their alma mater.",
+    "The IIOGA is a not-for-profit organization, founded with the intention of bringing together the alumni of Ilma International Girls' School for a collective cause that of uplifting, enhancing and developing their alma mater.",
   contact: {
     phone: '+94 76 055 5164',
     email: 'secretaryiioga@gmail.com',
@@ -17,7 +17,8 @@ export const siteConfig = {
   social: {
     facebook: 'https://web.facebook.com/Ilmaoga/?_rdc=1&_rdr#',
     instagram: 'https://www.instagram.com/ilmaoga/?hl=en',
-    linkedin: 'https://www.linkedin.com/company/ilma-international-old-girls-association/',
+    linkedin:
+      'https://www.linkedin.com/company/ilma-international-old-girls-association/',
   },
 } as const
 

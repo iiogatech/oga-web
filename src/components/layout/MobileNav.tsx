@@ -1,7 +1,12 @@
 'use client'
 
 import Link from 'next/link'
-import { AnimatePresence, motion, useReducedMotion, type Variants } from 'motion/react'
+import {
+  AnimatePresence,
+  motion,
+  useReducedMotion,
+  type Variants,
+} from 'motion/react'
 import { useEffect, useState, useSyncExternalStore } from 'react'
 import { createPortal } from 'react-dom'
 
@@ -106,7 +111,9 @@ export default function MobileNav() {
           <motion.span
             aria-hidden="true"
             className="absolute h-0.5 w-5 rounded-full bg-current"
-            animate={open ? { scaleX: 0, opacity: 0 } : { scaleX: 1, opacity: 1 }}
+            animate={
+              open ? { scaleX: 0, opacity: 0 } : { scaleX: 1, opacity: 1 }
+            }
             transition={{ duration: 0.14, ease: 'easeOut' }}
           />
           <motion.span
@@ -198,7 +205,10 @@ export default function MobileNav() {
                               href={item.href}
                               onClick={() => setOpen(false)}
                               {...(isExternal
-                                ? { target: '_blank', rel: 'noopener noreferrer' }
+                                ? {
+                                    target: '_blank',
+                                    rel: 'noopener noreferrer',
+                                  }
                                 : {})}
                               className="font-plus-jakarta-sans text-base text-stone-600"
                             >

@@ -16,8 +16,7 @@ export const eventLink = defineType({
       name: 'url',
       title: 'URL',
       type: 'url',
-      validation: (Rule) =>
-        Rule.required().uri({ scheme: ['http', 'https'] }),
+      validation: (Rule) => Rule.required().uri({ scheme: ['http', 'https'] }),
     }),
   ],
   preview: {

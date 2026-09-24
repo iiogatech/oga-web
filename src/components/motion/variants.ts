@@ -5,14 +5,7 @@ export const EASE_REVEAL = [0.25, 1, 0.5, 1] as const
 
 // Tags the wrapper components below are allowed to render as.
 export type IntrinsicTag =
-  | 'div'
-  | 'span'
-  | 'h1'
-  | 'h2'
-  | 'article'
-  | 'section'
-  | 'li'
-  | 'p'
+  'div' | 'span' | 'h1' | 'h2' | 'article' | 'section' | 'li' | 'p'
 
 // Same trigger line the old scroll-reveal system used: fires once the
 // element's top is 18% up from the bottom of the viewport.

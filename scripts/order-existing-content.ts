@@ -87,7 +87,9 @@ async function main() {
   }
   await rankGroup(tx, upcoming)
   await rankGroup(tx, past)
-  console.log(`event/upcoming: ${upcoming.map((e) => e._id).join(', ') || '(none)'}`)
+  console.log(
+    `event/upcoming: ${upcoming.map((e) => e._id).join(', ') || '(none)'}`,
+  )
   console.log(`event/past: ${past.map((e) => e._id).join(', ') || '(none)'}`)
 
   // Posts: same order the old `order(publishedAt desc)` query gave.

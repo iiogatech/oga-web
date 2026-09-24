@@ -105,7 +105,7 @@ export default async function LoyaltyProgramPage() {
 
   return (
     <>
-      <section className="bg-cream pt-32 pb-16 px-5 sm:pt-42">
+      <section className="bg-cream px-5 pt-32 pb-16 sm:pt-42">
         <Container className="max-w-6xl">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
             <Enter>
@@ -216,7 +216,7 @@ export default async function LoyaltyProgramPage() {
               No merchant partners listed yet — check back soon.
             </p>
           ) : (
-            <RevealStagger className="px-5 mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
+            <RevealStagger className="mt-10 grid grid-cols-2 gap-4 px-5 sm:grid-cols-3 lg:grid-cols-5">
               {loyalty.merchants.map((merchant) => (
                 <div
                   key={merchant._key}

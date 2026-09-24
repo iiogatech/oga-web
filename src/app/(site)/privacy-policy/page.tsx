@@ -125,7 +125,10 @@ const sections: LegalSection[] = [
   {
     heading: '5. Sharing of Information',
     blocks: [
-      { type: 'p', text: 'We do not sell, rent, or trade your personal information.' },
+      {
+        type: 'p',
+        text: 'We do not sell, rent, or trade your personal information.',
+      },
       {
         type: 'p',
         text: 'Personal information may be accessed by authorised members or representatives of IIOGA who require it for legitimate Association activities.',

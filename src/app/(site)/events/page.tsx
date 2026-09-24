@@ -18,18 +18,13 @@ function formatEventDate(date: string) {
   const d = new Date(date)
   return {
     month: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
-    day: d.getDate(),
     year: d.getFullYear(),
   }
 }
 
 export default async function EventsPage() {
   const [upcomingEvents, pastEvents, { activeVolunteerUrl }] =
-    await Promise.all([
-      getUpcomingEvents(),
-      getPastEvents(),
-      getSiteSettings(),
-    ])
+    await Promise.all([getUpcomingEvents(), getPastEvents(), getSiteSettings()])
 
   return (
     <>
@@ -52,23 +47,15 @@ export default async function EventsPage() {
           ) : (
             <EnterStagger delay={0.07} className="flex flex-col gap-4">
               {upcomingEvents.map((event) => {
-                const {  month, day, year } = formatEventDate(event.date)
+                const { month, year } = formatEventDate(event.date)
                 return (
                   <div
                     key={event._id}
-                    className="flex items-center gap-4 rounded-2xl border border-emerald-950/10 bg-brand-700 p-4 shadow-[0_10px_30px_-10px_rgba(20,56,38,0.07)] sm:gap-6 sm:p-7"
+                    className="bg-brand-700 flex items-center gap-4 rounded-2xl border border-emerald-950/10 p-4 shadow-[0_10px_30px_-10px_rgba(20,56,38,0.07)] sm:gap-6 sm:p-7"
                   >
-                    {/* <div className="flex p-2 size-16 shrink-0 flex-col items-center justify-center rounded-xl border border-emerald-950/10 bg-[#f0f6f2] sm:size-20">
-                      <span className="font-poppins text-brand-800 text-[11px] font-bold tracking-[1.1px] uppercase">
-                        {month}
-                      </span>
-                      <span className="font-poppins text-2xl font-bold text-stone-950">
-                        {year}
-                      </span>
-                    </div> */}
-                    <div className="flex size-20 p-2 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5]">
+                    <div className="flex size-20 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5] p-2">
                       <span className="font-poppins text-brand-400 text-xs font-bold tracking-[0.6px] uppercase">
-                        {month} {day}
+                        {month}
                       </span>
                       <span className="font-poppins text-brand-900 text-2xl font-bold">
                         {year}
@@ -97,7 +84,7 @@ export default async function EventsPage() {
           ) : (
             <RevealStagger className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
               {pastEvents.map((event) => {
-                const { month, day } = formatEventDate(event.date)
+                const { month, year } = formatEventDate(event.date)
                 const image = event.images?.[0]
                 const link = event.links?.[0]
                 return (
@@ -119,7 +106,7 @@ export default async function EventsPage() {
                           {month}
                         </span>
                         <span className="font-poppins text-2xl font-bold text-stone-900">
-                          {day}
+                          {year}
                         </span>
                       </div>
                       <div className="flex min-w-0 flex-1 flex-col gap-1">

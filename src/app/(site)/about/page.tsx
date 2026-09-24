@@ -112,7 +112,7 @@ export default async function AboutPage() {
             </Enter>
             <Enter
               delay={0.14}
-              className="mx-2 sm:mx-0 font-plus-jakarta-sans mt-4 flex flex-col gap-5 text-lg text-stone-600"
+              className="font-plus-jakarta-sans mx-2 mt-4 flex flex-col gap-5 text-lg text-stone-600 sm:mx-0"
             >
               {hero.paragraphs.map((paragraph, i) => (
                 <p key={i}>{paragraph}</p>

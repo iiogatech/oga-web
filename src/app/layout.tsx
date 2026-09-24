@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     template: '%s | ILMA OGA',
   },
   description:
-    "The Ilma International Old Girls' Association (IIOGA) brings together alumni of Ilma International Girls' School to uplift, enhance and develop their alma mater.",
+    "The IIOGA is a not-for-profit organization, founded with the intention of bringing together the alumni of Ilma International Girls' School for a collective cause that of uplifting, enhancing and developing their alma mater.",
 }
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
@@ -39,7 +39,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${poppins.variable} ${plusJakartaSans.variable} ${inter.variable} h-full scroll-smooth antialiased`}
     >
-      <body className="flex min-h-full flex-col bg-cream text-stone-700">
+      <body className="bg-cream flex min-h-full flex-col text-stone-700">
         {children}
         <SanityLive />
       </body>

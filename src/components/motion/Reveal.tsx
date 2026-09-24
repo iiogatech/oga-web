@@ -3,7 +3,12 @@
 import { motion, useReducedMotion } from 'motion/react'
 import type { ReactNode } from 'react'
 
-import { growVariants, riseVariants, VIEWPORT, type IntrinsicTag } from './variants'
+import {
+  growVariants,
+  riseVariants,
+  VIEWPORT,
+  type IntrinsicTag,
+} from './variants'
 
 const VARIANTS = { rise: riseVariants, scale: growVariants }
 

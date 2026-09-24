@@ -144,7 +144,10 @@ function BlogCard({ post, isActive }: { post: Post; isActive: boolean }) {
 
 function BlogView({ post }: { post: PostDetail }) {
   return (
-    <Enter as="div" className="mt-16 rounded-3xl bg-emerald-50 px-6 py-12 sm:px-14 sm:py-16">
+    <Enter
+      as="div"
+      className="mt-16 rounded-3xl bg-emerald-50 px-6 py-12 sm:px-14 sm:py-16"
+    >
       <div id="blog-view" className="scroll-mt-28">
         <h2 className="font-poppins mx-auto max-w-3xl text-center text-2xl leading-tight font-bold tracking-tight text-stone-900 uppercase sm:text-3xl">
           {post.title}

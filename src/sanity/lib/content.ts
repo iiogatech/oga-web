@@ -44,7 +44,8 @@ export type Chapter = ChaptersQueryResult[number]
 export type Project = ProjectsByStatusQueryResult[number]
 export type Post = PostsQueryResult[number]
 export type PostDetail = NonNullable<PostBySlugQueryResult>
-export type Event = UpcomingEventsQueryResult[number] | PastEventsQueryResult[number]
+export type Event =
+  UpcomingEventsQueryResult[number] | PastEventsQueryResult[number]
 
 // The app's one shared `'use cache'` boundary. `sanityFetch` calls
 // `cacheTag`/`cacheLife` internally but doesn't create the boundary itself —

@@ -47,7 +47,10 @@ export function requireWebSafeVideo() {
       { id: assetId },
     )
 
-    if (asset?.mimeType && !WEB_SAFE_VIDEO_MIME_TYPES.includes(asset.mimeType)) {
+    if (
+      asset?.mimeType &&
+      !WEB_SAFE_VIDEO_MIME_TYPES.includes(asset.mimeType)
+    ) {
       return `This file is ${asset.mimeType}, which most browsers can't play (e.g. .mov/QuickTime only works in Safari). Re-export as .mp4 (H.264 + AAC) and upload that instead.`
     }
 
