@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export const siteSettings = defineType({
   name: 'siteSettings',
-  title: 'Site Settings',
+  title: 'Common URLs',
   type: 'document',
   fields: [
     defineField({
@@ -33,6 +33,6 @@ export const siteSettings = defineType({
     }),
   ],
   preview: {
-    prepare: () => ({ title: 'Site Settings' }),
+    prepare: () => ({ title: 'Common URLs' }),
   },
 })

@@ -8,7 +8,7 @@ import type {
   LoyaltyPageQueryResult,
   MembershipPageQueryResult,
   PastEventsQueryResult,
-  PostBySlugQueryResult,
+  PostByIdQueryResult,
   PostsQueryResult,
   ProjectsByStatusQueryResult,
   ProjectsPageQueryResult,
@@ -21,7 +21,7 @@ import {
   loyaltyPageQuery,
   membershipPageQuery,
   pastEventsQuery,
-  postBySlugQuery,
+  postByIdQuery,
   postsQuery,
   projectsByStatusQuery,
   projectsPageQuery,
@@ -43,7 +43,7 @@ export type SiteSettings = {
 export type Chapter = ChaptersQueryResult[number]
 export type Project = ProjectsByStatusQueryResult[number]
 export type Post = PostsQueryResult[number]
-export type PostDetail = NonNullable<PostBySlugQueryResult>
+export type PostDetail = NonNullable<PostByIdQueryResult>
 export type Event =
   UpcomingEventsQueryResult[number] | PastEventsQueryResult[number]
 
@@ -145,9 +145,7 @@ export async function getPosts(): Promise<Post[]> {
   return data
 }
 
-export async function getPostBySlug(
-  slug: string,
-): Promise<PostDetail | undefined> {
-  const { data } = await cachedFetch(postBySlugQuery, { slug })
+export async function getPostById(id: string): Promise<PostDetail | undefined> {
+  const { data } = await cachedFetch(postByIdQuery, { id })
   return data ?? undefined
 }

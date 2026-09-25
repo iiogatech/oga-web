@@ -10,7 +10,7 @@ import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
 import Skeleton from '@/components/ui/Skeleton'
 import {
-  getPostBySlug,
+  getPostById,
   getPosts,
   type Post,
   type PostDetail,
@@ -52,19 +52,17 @@ async function BlogsContent({
     )
   }
 
-  const { post: requestedSlug } = await searchParams
-  const slug = Array.isArray(requestedSlug) ? requestedSlug[0] : requestedSlug
-  const activeSlug = posts.some((post) => post.slug === slug)
-    ? slug!
-    : posts[0].slug
+  const { post: requestedId } = await searchParams
+  const id = Array.isArray(requestedId) ? requestedId[0] : requestedId
+  const activeId = posts.some((post) => post._id === id) ? id! : posts[0]._id
 
-  const activePost = await getPostBySlug(activeSlug)
+  const activePost = await getPostById(activeId)
 
   return (
     <>
-      <BlogCardsGrid posts={posts} activeSlug={activeSlug} />
+      <BlogCardsGrid posts={posts} activeId={activeId} />
       {/* Keyed so switching posts remounts the view and replays its entrance. */}
-      {activePost && <BlogView key={activePost.slug} post={activePost} />}
+      {activePost && <BlogView key={activePost._id} post={activePost} />}
     </>
   )
 }
@@ -93,17 +91,17 @@ function BlogsSkeleton() {
 
 function BlogCardsGrid({
   posts,
-  activeSlug,
+  activeId,
 }: {
   posts: Post[]
-  activeSlug: string
+  activeId: string
 }) {
   return (
     <PagedGrid
-      initialIndex={posts.findIndex((post) => post.slug === activeSlug)}
+      initialIndex={posts.findIndex((post) => post._id === activeId)}
       items={posts.map((post) => ({
         id: post._id,
-        content: <BlogCard post={post} isActive={post.slug === activeSlug} />,
+        content: <BlogCard post={post} isActive={post._id === activeId} />,
       }))}
     />
   )
@@ -111,8 +109,9 @@ function BlogCardsGrid({
 
 function BlogCard({ post, isActive }: { post: Post; isActive: boolean }) {
   return (
-    <article
-      className={`h-full rounded-xl border bg-white p-2.5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-colors duration-200 sm:rounded-2xl sm:p-4 ${
+    <Link
+      href={`/blogs?post=${post._id}#blog-view`}
+      className={`group block h-full rounded-xl border bg-white p-2.5 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] transition-colors duration-200 sm:rounded-2xl sm:p-4 ${
         isActive ? 'border-brand-500' : 'border-stone-200/70'
       }`}
     >
@@ -131,14 +130,11 @@ function BlogCard({ post, isActive }: { post: Post; isActive: boolean }) {
         {post.title}
       </h2>
       <div className="mt-2 border-t border-stone-100 pt-2 sm:mt-3 sm:pt-3">
-        <Link
-          href={`/blogs?post=${post.slug}#blog-view`}
-          className="group font-poppins text-brand-800 inline-flex items-center gap-1 text-xs font-medium"
-        >
+        <span className="font-poppins text-brand-800 inline-flex items-center gap-1 text-xs font-medium">
           Read Article <Arrow />
-        </Link>
+        </span>
       </div>
-    </article>
+    </Link>
   )
 }
 

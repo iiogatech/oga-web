@@ -7,7 +7,7 @@ import { urlFor } from '@/sanity/lib/image'
 type NextImageProps = ComponentProps<typeof Image>
 
 type SanityImageProps = Omit<NextImageProps, 'src' | 'alt'> & {
-  image: SanityImageSource & { alt?: string }
+  image: (SanityImageSource & { alt?: string }) | null | undefined
   alt?: string
   // 'crop' fills the width/height box (pair with object-cover). 'max' scales
   // down to fit inside it without cropping (pair with object-contain).
@@ -16,7 +16,7 @@ type SanityImageProps = Omit<NextImageProps, 'src' | 'alt'> & {
 
 const PLACEHOLDER_SRC = '/images/placeholder.svg'
 
-function hasAsset(image: SanityImageSource | null | undefined): boolean {
+function hasAsset(image: SanityImageProps['image']): boolean {
   if (!image) return false
   if (typeof image !== 'object') return true
   // A bare asset reference or asset document resolves on its own; an image
@@ -50,7 +50,7 @@ export default function SanityImage({
   const width = 'width' in rest ? rest.width : undefined
   const height = 'height' in rest ? rest.height : undefined
 
-  const builder = urlFor(image).auto('format')
+  const builder = urlFor(image!).auto('format')
   const src = (
     typeof width === 'number' && typeof height === 'number'
       ? // @sanity/image-url auto-crops to the requested aspect ratio using the
@@ -64,5 +64,5 @@ export default function SanityImage({
       : builder.width(1920)
   ).url()
 
-  return <Image src={src} alt={alt ?? image.alt ?? ''} unoptimized {...rest} />
+  return <Image src={src} alt={alt ?? image!.alt ?? ''} unoptimized {...rest} />
 }

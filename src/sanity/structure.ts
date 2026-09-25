@@ -9,7 +9,7 @@ const SINGLETON_LIST_ITEMS: { id: string; title: string }[] = [
   { id: 'projectsPage', title: 'Projects page' },
   { id: 'membershipPage', title: 'Become a Member page' },
   { id: 'loyaltyPage', title: 'Loyalty program page' },
-  { id: 'siteSettings', title: 'Site Settings' },
+  { id: 'siteSettings', title: 'Common URLs' },
 ]
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet

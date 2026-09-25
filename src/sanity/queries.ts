@@ -77,20 +77,14 @@ export const postsQuery =
   defineQuery(`*[_type == "post"] | order(orderRank asc){
   _id,
   title,
-  "slug": slug.current,
   publishedAt,
-  excerpt,
   coverImage
 }`)
 
-export const postBySlugQuery =
-  defineQuery(`*[_type == "post" && slug.current == $slug][0]{
+export const postByIdQuery = defineQuery(`*[_type == "post" && _id == $id][0]{
   _id,
   title,
-  "slug": slug.current,
   publishedAt,
-  excerpt,
   coverImage,
-  body,
-  seoDescription
+  body
 }`)

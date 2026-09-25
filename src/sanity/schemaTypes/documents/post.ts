@@ -13,30 +13,15 @@ export const post = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'slug',
-      title: 'Slug',
-      type: 'slug',
-      options: { source: 'title', maxLength: 96 },
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'excerpt',
-      title: 'Excerpt',
-      type: 'text',
-      rows: 3,
-      validation: (Rule) => Rule.max(200),
-    }),
-    defineField({
       name: 'coverImage',
       title: 'Cover image',
       type: 'imageWithAlt',
-      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'body',
@@ -46,12 +31,6 @@ export const post = defineType({
         defineArrayMember({ type: 'block' }),
         defineArrayMember({ type: 'imageWithAlt' }),
       ],
-    }),
-    defineField({
-      name: 'seoDescription',
-      title: 'SEO description',
-      type: 'string',
-      validation: (Rule) => Rule.max(160),
     }),
     orderRankField({ type: 'post' }),
   ],

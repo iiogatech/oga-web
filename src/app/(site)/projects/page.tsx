@@ -7,6 +7,7 @@ import RevealStagger from '@/components/motion/RevealStagger'
 import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
+import MarqueeText from '@/components/ui/MarqueeText'
 import PortableTextBody from '@/components/ui/PortableTextBody'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
@@ -216,9 +217,9 @@ export default async function ProjectsPage() {
                     />
                   </div>
                   <div className="mt-3 flex flex-1 flex-col items-start justify-between gap-2 border-t border-stone-100 pt-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-1.5">
-                    <h3 className="font-poppins min-w-0 flex-1 truncate text-sm font-bold text-stone-900">
+                    <MarqueeText className="font-poppins w-full flex-1 text-sm font-bold text-stone-900">
                       {project.title}
-                    </h3>
+                    </MarqueeText>
                     <span className="font-poppins text-brand-800 shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-bold whitespace-nowrap">
                       ✓ Completed
                     </span>
@@ -288,7 +289,7 @@ export default async function ProjectsPage() {
                     : 'border border-stone-100 shadow-lg'
                 }`}
               >
-                <span className="font-poppins text-3xl font-extrabold text-stone-900">
+                <span className="font-poppins text-center text-3xl font-extrabold text-stone-900">
                   {tier.label}
                 </span>
                 <Button

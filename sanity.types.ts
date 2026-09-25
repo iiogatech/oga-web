@@ -52,7 +52,6 @@ export type ImageWithAlt = {
   media?: unknown
   hotspot?: SanityImageHotspot
   crop?: SanityImageCrop
-  alt: string
 }
 
 export type Post = {
@@ -62,10 +61,8 @@ export type Post = {
   _updatedAt: string
   _rev: string
   title: string
-  slug: Slug
   publishedAt: string
-  excerpt?: string
-  coverImage: ImageWithAlt
+  coverImage?: ImageWithAlt
   body?: Array<
     | {
         children?: Array<{
@@ -90,14 +87,7 @@ export type Post = {
         _key: string
       } & ImageWithAlt)
   >
-  seoDescription?: string
   orderRank?: string
-}
-
-export type Slug = {
-  _type: 'slug'
-  current: string
-  source?: string
 }
 
 export type Chapter = {
@@ -423,6 +413,12 @@ export type Geopoint = {
   alt?: number
 }
 
+export type Slug = {
+  _type: 'slug'
+  current: string
+  source?: string
+}
+
 export type AllSanitySchemaTypes =
   | Milestone
   | Merchant
@@ -431,7 +427,6 @@ export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | ImageWithAlt
   | Post
-  | Slug
   | Chapter
   | Event
   | Project
@@ -452,6 +447,7 @@ export type AllSanitySchemaTypes =
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint
+  | Slug
 
 // Source: src/sanity/queries.ts
 // Variable: homePageQuery
@@ -661,26 +657,22 @@ export type PastEventsQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: postsQuery
-// Query: *[_type == "post"] | order(orderRank asc){  _id,  title,  "slug": slug.current,  publishedAt,  excerpt,  coverImage}
+// Query: *[_type == "post"] | order(orderRank asc){  _id,  title,  publishedAt,  coverImage}
 export type PostsQueryResult = Array<{
   _id: string
   title: string
-  slug: string
   publishedAt: string
-  excerpt: string | null
-  coverImage: ImageWithAlt
+  coverImage: ImageWithAlt | null
 }>
 
 // Source: src/sanity/queries.ts
-// Variable: postBySlugQuery
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id,  title,  "slug": slug.current,  publishedAt,  excerpt,  coverImage,  body,  seoDescription}
-export type PostBySlugQueryResult = {
+// Variable: postByIdQuery
+// Query: *[_type == "post" && _id == $id][0]{  _id,  title,  publishedAt,  coverImage,  body}
+export type PostByIdQueryResult = {
   _id: string
   title: string
-  slug: string
   publishedAt: string
-  excerpt: string | null
-  coverImage: ImageWithAlt
+  coverImage: ImageWithAlt | null
   body: Array<
     | ({
         _key: string
@@ -705,7 +697,6 @@ export type PostBySlugQueryResult = {
         _key: string
       }
   > | null
-  seoDescription: string | null
 } | null
 
 // Query TypeMap
@@ -722,7 +713,7 @@ declare module '@sanity/client' {
     '*[_type == "project" && status == $status] | order(orderRank asc){\n  _id,\n  title,\n  status,\n  image,\n  description,\n  progress,\n  date\n}': ProjectsByStatusQueryResult
     '*[_type == "event" && status == "upcoming"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': UpcomingEventsQueryResult
     '*[_type == "event" && status == "past"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': PastEventsQueryResult
-    '*[_type == "post"] | order(orderRank asc){\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  excerpt,\n  coverImage\n}': PostsQueryResult
-    '*[_type == "post" && slug.current == $slug][0]{\n  _id,\n  title,\n  "slug": slug.current,\n  publishedAt,\n  excerpt,\n  coverImage,\n  body,\n  seoDescription\n}': PostBySlugQueryResult
+    '*[_type == "post"] | order(orderRank asc){\n  _id,\n  title,\n  publishedAt,\n  coverImage\n}': PostsQueryResult
+    '*[_type == "post" && _id == $id][0]{\n  _id,\n  title,\n  publishedAt,\n  coverImage,\n  body\n}': PostByIdQueryResult
   }
 }
