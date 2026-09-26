@@ -7,7 +7,6 @@ import RevealStagger from '@/components/motion/RevealStagger'
 import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
-import MarqueeText from '@/components/ui/MarqueeText'
 import PortableTextBody from '@/components/ui/PortableTextBody'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
@@ -168,7 +167,7 @@ export default async function ProjectsPage() {
                         className="aspect-4/3 w-full object-cover"
                       />
                     </div>
-                    <h3 className="font-poppins truncate text-lg font-bold text-stone-900">
+                    <h3 className="font-poppins line-clamp-2 h-14 text-lg font-bold text-stone-900 sm:line-clamp-1 sm:h-7">
                       {project.title}
                     </h3>
                   </div>
@@ -216,10 +215,10 @@ export default async function ProjectsPage() {
                       className="aspect-4/3 w-full object-cover"
                     />
                   </div>
-                  <div className="mt-3 flex flex-1 flex-col items-start justify-between gap-2 border-t border-stone-100 pt-2.5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2 sm:gap-y-1.5">
-                    <MarqueeText className="font-poppins w-full flex-1 text-sm font-bold text-stone-900">
+                  <div className="mt-3 flex flex-1 flex-col items-start gap-2 border-t border-stone-100 pt-2.5">
+                    <h3 className="font-poppins line-clamp-2 h-10 w-full text-sm leading-snug font-bold text-stone-900 sm:line-clamp-1 sm:h-5">
                       {project.title}
-                    </MarqueeText>
+                    </h3>
                     <span className="font-poppins text-brand-800 shrink-0 rounded-full bg-emerald-100 px-2 py-0.5 text-[11px] font-bold whitespace-nowrap">
                       ✓ Completed
                     </span>
