@@ -3,15 +3,8 @@ import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { formatEventDate } from '@/lib/formatEventDate'
 import type { Event } from '@/sanity/lib/content'
-
-function formatEventDate(date: string) {
-  const d = new Date(date)
-  return {
-    month: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
-    year: d.getFullYear(),
-  }
-}
 
 export default function PastEventsSection({ events }: { events: Event[] }) {
   return (
@@ -35,7 +28,7 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
         ) : (
           <RevealStagger className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2">
             {events.map((event) => {
-              const { month, year } = formatEventDate(event.date)
+              const { label, year } = formatEventDate(event)
               const image = event.images?.[0]
               const link = event.links?.[0]
               return (
@@ -54,7 +47,7 @@ export default function PastEventsSection({ events }: { events: Event[] }) {
                   <div className="flex gap-5 p-6">
                     <div className="flex flex-col items-center border-r border-stone-200 pr-5">
                       <span className="font-poppins text-brand-400 text-xs font-bold tracking-[0.6px] uppercase">
-                        {month}
+                        {label}
                       </span>
                       <span className="font-poppins text-2xl font-extrabold text-stone-900">
                         {year}

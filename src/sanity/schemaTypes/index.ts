@@ -5,6 +5,7 @@ import { event } from './documents/event'
 import { post } from './documents/post'
 import { project } from './documents/project'
 import { eventLink } from './objects/eventLink'
+import { heroSlide } from './objects/heroSlide'
 import { imageWithAlt } from './objects/imageWithAlt'
 import { merchant } from './objects/merchant'
 import { milestone } from './objects/milestone'
@@ -41,6 +42,7 @@ export const schemaTypes: SchemaTypeDefinition[] = [
   // objects
   imageWithAlt,
   eventLink,
+  heroSlide,
   teamMember,
   merchant,
   milestone,

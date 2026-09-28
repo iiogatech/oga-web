@@ -4,7 +4,7 @@ import {
   Users,
   type LucideIcon,
 } from 'lucide-react'
-import HeroMedia from '@/components/home/HeroMedia'
+import Hero from '@/components/home/Hero'
 import PastEventsSection from '@/components/home/PastEventsSection'
 import Enter from '@/components/motion/Enter'
 import RevealStagger from '@/components/motion/RevealStagger'
@@ -12,9 +12,9 @@ import Arrow from '@/components/ui/Arrow'
 import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import CountUp from '@/components/ui/CountUp'
-import HeroHeading from '@/components/ui/HeroHeading'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { formatEventDate } from '@/lib/formatEventDate'
 import {
   getHomePage,
   getOngoingProjects,
@@ -42,14 +42,6 @@ const milestoneIcons: Record<string, LucideIcon> = {
   Projects: ClipboardList,
 }
 
-function formatEventDate(date: string) {
-  const d = new Date(date)
-  return {
-    month: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
-    year: d.getFullYear(),
-  }
-}
-
 export default async function HomePage() {
   const [home, ongoingProjects, upcomingEvents, pastEvents] = await Promise.all(
     [
@@ -63,39 +55,7 @@ export default async function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-brand-950 relative flex min-h-[600px] items-center overflow-hidden pt-32 pb-24 sm:min-h-180 sm:pt-42 sm:pb-38">
-        <HeroMedia image={home.hero.image} />
-        <div className="from-brand-950 via-brand-950/60 absolute inset-0 bg-linear-to-tr to-transparent" />
-        <div className="from-brand-950/70 absolute inset-0 bg-linear-to-t to-transparent" />
-        <Container className="relative max-w-6xl">
-          <div className="flex max-w-2xl flex-col items-start gap-6">
-            <Enter
-              as="span"
-              className="font-plus-jakarta-sans rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold tracking-[0.6px] text-white uppercase backdrop-blur-[5px]"
-            >
-              {home.hero.eyebrow}
-            </Enter>
-            <HeroHeading
-              text={home.hero.headline}
-              delay={0.07}
-              className="font-poppins text-5xl leading-tight font-bold tracking-tight text-white sm:text-6xl lg:text-7xl"
-            />
-            <Enter
-              delay={0.14}
-              className="flex flex-wrap items-center gap-4 pt-3"
-            >
-              <Button href={home.hero.ctaUrl} variant="light">
-                {home.hero.ctaLabel}
-              </Button>
-              {home.hero.secondaryCtaUrl && (
-                <Button href={home.hero.secondaryCtaUrl} variant="glass">
-                  {home.hero.secondaryCtaLabel}
-                </Button>
-              )}
-            </Enter>
-          </div>
-        </Container>
-      </section>
+      <Hero slides={home.hero.slides} />
 
       {/* About summary */}
       <section className="bg-cream py-10">
@@ -233,7 +193,7 @@ export default async function HomePage() {
               </p>
             ) : (
               upcomingEvents.map((event) => {
-                const { month, year } = formatEventDate(event.date)
+                const { label, year } = formatEventDate(event)
                 return (
                   <div
                     key={event._id}
@@ -241,7 +201,7 @@ export default async function HomePage() {
                   >
                     <div className="flex size-20 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5] p-2">
                       <span className="font-poppins text-brand-400 text-xs font-bold tracking-[0.6px] uppercase">
-                        {month}
+                        {label}
                       </span>
                       <span className="font-poppins text-brand-900 text-2xl font-bold">
                         {year}

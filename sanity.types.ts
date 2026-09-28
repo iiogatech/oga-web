@@ -33,6 +33,17 @@ export type TeamMember = {
   role: string
 }
 
+export type HeroSlide = {
+  _type: 'heroSlide'
+  eyebrow?: string
+  headline: string
+  image: ImageWithAlt
+  ctaLabel: string
+  ctaUrl?: string
+  secondaryCtaLabel?: string
+  secondaryCtaUrl?: string
+}
+
 export type EventLink = {
   _type: 'eventLink'
   label: string
@@ -113,6 +124,7 @@ export type Event = {
   _rev: string
   title: string
   status: 'upcoming' | 'past'
+  datePrecision: 'full' | 'monthYear'
   date: string
   images?: Array<
     {
@@ -284,13 +296,11 @@ export type HomePage = {
   _updatedAt: string
   _rev: string
   hero: {
-    eyebrow?: string
-    headline: string
-    image: ImageWithAlt
-    ctaLabel: string
-    ctaUrl?: string
-    secondaryCtaLabel?: string
-    secondaryCtaUrl?: string
+    slides: Array<
+      {
+        _key: string
+      } & HeroSlide
+    >
   }
   aboutImage: ImageWithAlt
   milestones?: Array<
@@ -423,6 +433,7 @@ export type AllSanitySchemaTypes =
   | Milestone
   | Merchant
   | TeamMember
+  | HeroSlide
   | EventLink
   | SanityImageAssetReference
   | ImageWithAlt
@@ -454,13 +465,11 @@ export type AllSanitySchemaTypes =
 // Query: *[_type == "homePage"][0]{  hero,  aboutImage,  milestones}
 export type HomePageQueryResult = {
   hero: {
-    eyebrow?: string
-    headline: string
-    image: ImageWithAlt
-    ctaLabel: string
-    ctaUrl?: string
-    secondaryCtaLabel?: string
-    secondaryCtaUrl?: string
+    slides: Array<
+      {
+        _key: string
+      } & HeroSlide
+    >
   }
   aboutImage: ImageWithAlt
   milestones: Array<
@@ -617,11 +626,12 @@ export type ProjectsByStatusQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: upcomingEventsQuery
-// Query: *[_type == "event" && status == "upcoming"] | order(orderRank asc){  _id,  title,  date,  description,  images,  links}
+// Query: *[_type == "event" && status == "upcoming"] | order(orderRank asc){  _id,  title,  date,  datePrecision,  description,  images,  links}
 export type UpcomingEventsQueryResult = Array<{
   _id: string
   title: string
   date: string
+  datePrecision: 'full' | 'monthYear'
   description: null
   images: Array<
     {
@@ -637,11 +647,12 @@ export type UpcomingEventsQueryResult = Array<{
 
 // Source: src/sanity/queries.ts
 // Variable: pastEventsQuery
-// Query: *[_type == "event" && status == "past"] | order(orderRank asc){  _id,  title,  date,  description,  images,  links}
+// Query: *[_type == "event" && status == "past"] | order(orderRank asc){  _id,  title,  date,  datePrecision,  description,  images,  links}
 export type PastEventsQueryResult = Array<{
   _id: string
   title: string
   date: string
+  datePrecision: 'full' | 'monthYear'
   description: null
   images: Array<
     {
@@ -711,8 +722,8 @@ declare module '@sanity/client' {
     '*[_type == "siteSettings"][0]{\n  activeVolunteerUrl,\n  donateUrl,\n  whatsappUrl\n}': SiteSettingsQueryResult
     '*[_type == "chapter"] | order(orderRank asc){\n  _id,\n  country,\n  description,\n  images\n}': ChaptersQueryResult
     '*[_type == "project" && status == $status] | order(orderRank asc){\n  _id,\n  title,\n  status,\n  image,\n  description,\n  progress,\n  date\n}': ProjectsByStatusQueryResult
-    '*[_type == "event" && status == "upcoming"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': UpcomingEventsQueryResult
-    '*[_type == "event" && status == "past"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  description,\n  images,\n  links\n}': PastEventsQueryResult
+    '*[_type == "event" && status == "upcoming"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  datePrecision,\n  description,\n  images,\n  links\n}': UpcomingEventsQueryResult
+    '*[_type == "event" && status == "past"] | order(orderRank asc){\n  _id,\n  title,\n  date,\n  datePrecision,\n  description,\n  images,\n  links\n}': PastEventsQueryResult
     '*[_type == "post"] | order(orderRank asc){\n  _id,\n  title,\n  publishedAt,\n  coverImage\n}': PostsQueryResult
     '*[_type == "post" && _id == $id][0]{\n  _id,\n  title,\n  publishedAt,\n  coverImage,\n  body\n}': PostByIdQueryResult
   }

@@ -13,6 +13,7 @@
     "order-chapters": "tsx --env-file=.env.local scripts/order-chapters.ts",
     "order-existing-content": "tsx --env-file=.env.local scripts/order-existing-content.ts",
     "normalize-event-dates": "tsx --env-file=.env.local scripts/normalize-event-dates.ts",
+    "migrate-hero-slides": "tsx --env-file=.env.local scripts/migrate-hero-slides.ts",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
   },

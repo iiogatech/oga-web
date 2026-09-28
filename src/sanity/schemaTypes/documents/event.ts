@@ -28,12 +28,29 @@ export const event = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'datePrecision',
+      title: 'Date precision',
+      description:
+        'Choose whether the site shows the exact day this event happened, or just the month and year.',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Year, Month & Day', value: 'full' },
+          { title: 'Year & Month', value: 'monthYear' },
+        ],
+        layout: 'radio',
+      },
+      initialValue: 'monthYear',
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: 'date',
-      title: 'Month & Year',
-      description: 'Only the month and year are shown on the site.',
+      title: 'Date',
+      description:
+        'Pick the full date. Whether the day is shown on the site depends on the "Date precision" option above.',
       type: 'date',
       options: {
-        dateFormat: 'MMMM yyyy',
+        dateFormat: 'D MMMM YYYY',
       },
       validation: (Rule) => Rule.required(),
     }),

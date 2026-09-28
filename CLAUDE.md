@@ -28,6 +28,7 @@ pnpm typegen          # sanity schemas extract --enforce-required-fields && sani
 pnpm seed                       # tsx --env-file=.env.local scripts/seed.ts (one-time content seed)
 pnpm order-chapters              # tsx --env-file=.env.local scripts/order-chapters.ts
 pnpm order-existing-content      # tsx --env-file=.env.local scripts/order-existing-content.ts
+pnpm migrate-hero-slides         # tsx --env-file=.env.local scripts/migrate-hero-slides.ts (one-time: flat hero -> hero.slides)
 ```
 
 There is no test runner configured in this repo. `pnpm lint` and `pnpm typecheck` are the correctness gates; run both before considering a change done.

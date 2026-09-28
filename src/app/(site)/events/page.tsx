@@ -7,20 +7,13 @@ import Button from '@/components/ui/Button'
 import Container from '@/components/ui/Container'
 import SanityImage from '@/components/ui/SanityImage'
 import SectionHeading from '@/components/ui/SectionHeading'
+import { formatEventDate } from '@/lib/formatEventDate'
 import {
   getPastEvents,
   getSiteSettings,
   getUpcomingEvents,
 } from '@/sanity/lib/content'
 import { LucideArrowRight } from 'lucide-react'
-
-function formatEventDate(date: string) {
-  const d = new Date(date)
-  return {
-    month: d.toLocaleDateString('en-US', { month: 'short' }).toUpperCase(),
-    year: d.getFullYear(),
-  }
-}
 
 export default async function EventsPage() {
   const [upcomingEvents, pastEvents, { activeVolunteerUrl }] =
@@ -47,7 +40,7 @@ export default async function EventsPage() {
           ) : (
             <EnterStagger delay={0.07} className="flex flex-col gap-4">
               {upcomingEvents.map((event) => {
-                const { month, year } = formatEventDate(event.date)
+                const { label, year } = formatEventDate(event)
                 return (
                   <div
                     key={event._id}
@@ -55,7 +48,7 @@ export default async function EventsPage() {
                   >
                     <div className="flex size-20 shrink-0 flex-col items-center justify-center rounded-xl border border-[#dbeee3] bg-[#f2f8f5] p-2">
                       <span className="font-poppins text-brand-400 text-xs font-bold tracking-[0.6px] uppercase">
-                        {month}
+                        {label}
                       </span>
                       <span className="font-poppins text-brand-900 text-2xl font-bold">
                         {year}
@@ -84,7 +77,7 @@ export default async function EventsPage() {
           ) : (
             <RevealStagger className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2">
               {pastEvents.map((event) => {
-                const { month, year } = formatEventDate(event.date)
+                const { label, year } = formatEventDate(event)
                 const image = event.images?.[0]
                 const link = event.links?.[0]
                 return (
@@ -103,7 +96,7 @@ export default async function EventsPage() {
                     <div className="flex gap-5 p-6">
                       <div className="flex flex-col items-center border-r border-stone-100 pr-5">
                         <span className="font-poppins text-brand-600 text-xs font-bold tracking-[0.6px] uppercase">
-                          {month}
+                          {label}
                         </span>
                         <span className="font-poppins text-2xl font-bold text-stone-900">
                           {year}

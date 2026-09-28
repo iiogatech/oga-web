@@ -58,6 +58,7 @@ export const upcomingEventsQuery =
   _id,
   title,
   date,
+  datePrecision,
   description,
   images,
   links
@@ -68,6 +69,7 @@ export const pastEventsQuery =
   _id,
   title,
   date,
+  datePrecision,
   description,
   images,
   links

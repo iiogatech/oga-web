@@ -19,6 +19,11 @@ export default function Loading() {
             </div>
           </div>
         </Container>
+        <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
+          <Skeleton className="h-2 w-6 rounded-full bg-white/40" />
+          <Skeleton className="h-2 w-2 rounded-full bg-white/20" />
+          <Skeleton className="h-2 w-2 rounded-full bg-white/20" />
+        </div>
       </section>
 
       {/* About summary */}
