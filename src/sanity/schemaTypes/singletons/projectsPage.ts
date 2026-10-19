@@ -52,6 +52,26 @@ export const projectsPage = defineType({
           validation: (Rule) =>
             Rule.uri({ scheme: ['http', 'https'], allowRelative: true }),
         }),
+        defineField({
+          name: 'video',
+          title: 'Video',
+          description:
+            'Shown at the end of the Recent Project section (.mp4 or .webm only — .mov/QuickTime won’t play outside Safari).',
+          type: 'file',
+          options: { accept: 'video/mp4,video/webm' },
+          validation: (Rule) =>
+            Rule.custom(maxAssetSize(MAX_VIDEO_SIZE_BYTES, 'Video')).custom(
+              requireWebSafeVideo(),
+            ),
+        }),
+        defineField({
+          name: 'videoPoster',
+          title: 'Video thumbnail',
+          description:
+            'Shown as the preview image before the video above is played. Leave empty to use the first video frame.',
+          type: 'imageWithAlt',
+          hidden: ({ parent }) => !parent?.video?.asset,
+        }),
       ],
       validation: (Rule) => Rule.required(),
     }),
@@ -66,6 +86,16 @@ export const projectsPage = defineType({
         Rule.custom(maxAssetSize(MAX_VIDEO_SIZE_BYTES, 'Video')).custom(
           requireWebSafeVideo(),
         ),
+    }),
+    defineField({
+      name: 'droneVideoPoster',
+      title: 'Drone video thumbnail',
+      description:
+        'Shown as the preview image before the drone video above is played. Leave empty to use the first video frame.',
+      type: 'imageWithAlt',
+      hidden: ({ document }) =>
+        !(document as { droneVideo?: { asset?: unknown } } | undefined)
+          ?.droneVideo?.asset,
     }),
   ],
   preview: {

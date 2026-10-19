@@ -237,12 +237,19 @@ export type ProjectsPage = {
     image: ImageWithAlt
     highlightsLabel?: string
     highlightsUrl?: string
+    video?: {
+      asset?: SanityFileAssetReference
+      media?: unknown
+      _type: 'file'
+    }
+    videoPoster?: ImageWithAlt
   }
   droneVideo?: {
     asset?: SanityFileAssetReference
     media?: unknown
     _type: 'file'
   }
+  droneVideoPoster?: ImageWithAlt
 }
 
 export type AboutPage = {
@@ -523,7 +530,7 @@ export type AboutPageQueryResult = {
 
 // Source: src/sanity/queries.ts
 // Variable: projectsPageQuery
-// Query: *[_type == "projectsPage"][0]{  dehiwala,  "droneVideo": droneVideo.asset->{url, mimeType}}
+// Query: *[_type == "projectsPage"][0]{  dehiwala{    ...,    "video": video.asset->{url, mimeType}  },  "droneVideo": droneVideo.asset->{url, mimeType},  droneVideoPoster}
 export type ProjectsPageQueryResult = {
   dehiwala: {
     show?: boolean
@@ -549,11 +556,17 @@ export type ProjectsPageQueryResult = {
     image: ImageWithAlt
     highlightsLabel?: string
     highlightsUrl?: string
+    video: {
+      url: string
+      mimeType: string
+    } | null
+    videoPoster?: ImageWithAlt
   }
   droneVideo: {
     url: string
     mimeType: string
   } | null
+  droneVideoPoster: ImageWithAlt | null
 } | null
 
 // Source: src/sanity/queries.ts
@@ -716,7 +729,7 @@ declare module '@sanity/client' {
   interface SanityQueries {
     '*[_type == "homePage"][0]{\n  hero,\n  aboutImage,\n  milestones\n}': HomePageQueryResult
     '*[_type == "aboutPage"][0]{\n  president,\n  team\n}': AboutPageQueryResult
-    '*[_type == "projectsPage"][0]{\n  dehiwala,\n  "droneVideo": droneVideo.asset->{url, mimeType}\n}': ProjectsPageQueryResult
+    '*[_type == "projectsPage"][0]{\n  dehiwala{\n    ...,\n    "video": video.asset->{url, mimeType}\n  },\n  "droneVideo": droneVideo.asset->{url, mimeType},\n  droneVideoPoster\n}': ProjectsPageQueryResult
     '*[_type == "membershipPage"][0]{\n  poster,\n  documentsRequired,\n  payment,\n  ctaLabel,\n  ctaUrl\n}': MembershipPageQueryResult
     '*[_type == "loyaltyPage"][0]{\n  merchants\n}': LoyaltyPageQueryResult
     '*[_type == "siteSettings"][0]{\n  activeVolunteerUrl,\n  donateUrl,\n  whatsappUrl\n}': SiteSettingsQueryResult

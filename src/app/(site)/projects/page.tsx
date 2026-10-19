@@ -1,3 +1,4 @@
+import type { SanityImageSource } from '@sanity/image-url'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -16,6 +17,12 @@ import {
   getProjectsPage,
   getSiteSettings,
 } from '@/sanity/lib/content'
+import { urlFor } from '@/sanity/lib/image'
+
+function posterUrl(image: SanityImageSource | null | undefined) {
+  if (!image) return undefined
+  return urlFor(image).width(1600).auto('format').url()
+}
 
 const donationStories = [
   {
@@ -97,6 +104,23 @@ export default async function ProjectsPage() {
                 />
               </Enter>
             </div>
+            {dehiwala.video?.url && (
+              <Reveal className="mt-12">
+                <video
+                  controls
+                  playsInline
+                  preload="metadata"
+                  poster={posterUrl(dehiwala.videoPoster)}
+                  aria-label={dehiwala.title}
+                  className="aspect-video w-full rounded-3xl border border-stone-100 bg-black object-cover shadow-xl"
+                >
+                  <source
+                    src={dehiwala.video.url}
+                    type={dehiwala.video.mimeType}
+                  />
+                </video>
+              </Reveal>
+            )}
           </Container>
         </section>
       )}
@@ -110,6 +134,7 @@ export default async function ProjectsPage() {
                 controls
                 playsInline
                 preload="metadata"
+                poster={posterUrl(projectsPage.droneVideoPoster)}
                 aria-label="Ilma International Girls' School drone video"
                 className="aspect-video w-full rounded-2xl border border-white/10 bg-black object-cover shadow-xl"
               >
